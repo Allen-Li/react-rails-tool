@@ -30,6 +30,7 @@ export default class ImageContainer extends Component {
     var total_index = this.props.images.length - 1
     return this.props.images.map((image, index) => {
       return(
+        image._destroy ? '' :
         <div className="image-preview" key={index}>
           <div className="image-container">
             <img className="image-thum" src={image.asset} />
@@ -41,14 +42,14 @@ export default class ImageContainer extends Component {
               <label className="control-label col-sm-1">Link:</label>
               <div className="col-sm-11">
                 <input type="text" className={"form-control"} id="inputName" placeholder="Image Link"
-                  onChange={this.props.setImageInfo.bind(this, 'link', index)}></input>
+                  onChange={this.props.setImageInfo.bind(this, 'link', index)} value={image.link || ""}></input>
               </div>
             </div>
             <div className="form-group row">
               <label className="control-label col-sm-1">Alt:</label>
               <div className="col-sm-11">
                 <input type="text" className={"form-control"} id="inputName" placeholder="Image Alt"
-                  onChange={this.props.setImageInfo.bind(this, 'alt', index)}></input>
+                  onChange={this.props.setImageInfo.bind(this, 'alt', index)} value={image.alt || ""}></input>
               </div>
             </div>
             <div className="image-action">
@@ -70,7 +71,7 @@ export default class ImageContainer extends Component {
       <div>
         <div className={`drop-zone ${this.props.image_drop_zone_class}`}>
           <Dropzone onDrop={this.onDrop.bind(this)} multiple disablePreview accept="image/*">
-            <p className="prompt">Dropping some Images here, or click to select images to upload.</p>
+            <p className="prompt">Dropping some images here, or click to select images to upload.</p>
           </Dropzone>
         </div>
         {this.renderUploadResult()}
