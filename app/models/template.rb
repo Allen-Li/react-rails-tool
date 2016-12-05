@@ -6,6 +6,11 @@ class Template < ApplicationRecord
 
   before_save :handle_name
 
+  def width
+    width_px = name[/\d+px/]
+    name[/\d+px/] ? name[/\d+px/][/\d+/].to_i : 'responsive'
+  end
+
   private
 
   def handle_name
